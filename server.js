@@ -1,15 +1,19 @@
 const express = require("express");
-const app = express();
-const port = 3001 || process.env.PORT;
 const cors = require("cors");
 
+const { port } = require("./config/env");
+
+const app = express();
 const corsOptions = {
-  origin: "*",
-  credentials: true,
-  optionSuccessStatus: 200,
+    origin: "*",
+    credentials: true,
+    optionSuccessStatus: 200,
 };
 
 app.use(cors(corsOptions));
+
+// Public images
+app.use(express.static("uploads"));
 
 // Routes
 const moviesRouter = require("./routes/movies");
@@ -17,8 +21,7 @@ const uploadRoutes = require("./routes/upload.js");
 
 app.use("/movies", moviesRouter);
 app.use("/upload", uploadRoutes);
-//
 
 app.listen(port, () => {
-  console.log("Server up and listening...");
+    console.log("Server up and listening...");
 });

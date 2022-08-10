@@ -14,24 +14,22 @@ router.post("/images", fileUpload(), (req, res) => {
 
         const filename = new Date().getTime() + "_" + file.name;
 
-        setTimeout(() => {
-            file.mv("./uploads/images/" + filename, function (error) {
-                if (error) {
-                    res.status(500).json({
-                        message: "Error while uploading file",
-                    });
-                } else {
-                    res.json({
-                        status: true,
-                        message: "File uploaded successfully",
-                        data: {
-                            file: filename,
-                            url: `${appUrl}/images/${filename}`,
-                        },
-                    });
-                }
-            });
-        }, 3000);
+        file.mv("./uploads/images/" + filename, function (error) {
+            if (error) {
+                res.status(500).json({
+                    message: "Error while uploading file",
+                });
+            } else {
+                res.json({
+                    status: true,
+                    message: "File uploaded successfully",
+                    data: {
+                        file: filename,
+                        url: `${appUrl}/images/${filename}`,
+                    },
+                });
+            }
+        });
     } else {
         res.status(400).send({ message: "No file uploaded" });
     }

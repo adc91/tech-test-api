@@ -1,12 +1,15 @@
 const mongoose = require("mongoose");
 
-const { mongoUrl } = require("../config/env");
+const { mongoDb } = require("../config/env");
 
 // Mongo
-mongoose.connect(`mongodb://${mongoUrl}/movies-app`, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-});
+mongoose.connect(
+    `mongodb+srv://${mongoDb.username}:${mongoDb.password}@${mongoDb.host}`,
+    {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+    }
+);
 
 const movieSchema = new mongoose.Schema({
     title: String,

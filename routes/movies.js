@@ -5,6 +5,7 @@ const Movie = require("../models/movieModel");
 const router = express.Router();
 
 router.get("/", function (req, res) {
+    console.log(req.hostname);
     Movie.find({})
         .sort({ _id: -1 })
         .limit(5)

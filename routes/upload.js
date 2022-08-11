@@ -1,8 +1,6 @@
 const express = require("express");
 const fileUpload = require("express-fileupload");
 
-const { appUrl } = require("../config/env");
-
 const router = express.Router();
 
 router.post("/images", fileUpload(), (req, res) => {
@@ -25,7 +23,6 @@ router.post("/images", fileUpload(), (req, res) => {
                     message: "File uploaded successfully",
                     data: {
                         file: filename,
-                        url: `${appUrl}/images/${filename}`,
                     },
                 });
             }

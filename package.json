@@ -1,4 +1,5 @@
 {
+    "license": "ISC",
     "dependencies": {
         "cors": "^2.8.5",
         "dotenv": "^16.0.1",
@@ -8,6 +9,9 @@
         "mongoose": "^6.5.2"
     },
     "scripts": {
-        "start": "npx nodemon server.js"
+        "start": "node server.js"
+    },
+    "engines": {
+        "node": "16.x"
     }
 }

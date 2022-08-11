@@ -13,6 +13,12 @@ router.get("/", function (req, res) {
         });
 });
 
+router.get("/:id", function (req, res) {
+    Movie.findById(req.params.id).exec(function (err, movie) {
+        res.send(movie);
+    });
+});
+
 router.post(
     "/",
     formidableMiddleware({ multiple: false }),
@@ -22,6 +28,7 @@ router.post(
 
         const movie = new Movie({
             title: req.fields.title,
+            description: req.fields.description,
             cover: req.fields.cover,
             actors: actors,
         });

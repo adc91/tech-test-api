@@ -10,8 +10,9 @@ mongoose.connect(`mongodb://${mongoUrl}/movies-app`, {
 
 const movieSchema = new mongoose.Schema({
     title: String,
+    description: String,
     cover: String,
-    actors: [Array],
+    actors: Object,
 });
 
 module.exports = mongoose.model("Movie", movieSchema);

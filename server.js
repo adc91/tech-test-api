@@ -1,5 +1,6 @@
 const express = require("express");
 const cors = require("cors");
+const bodyParser = require("body-parser");
 
 const { port } = require("./config/env");
 
@@ -12,8 +13,7 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 
-// Public images
-app.use(express.static("uploads"));
+app.use(bodyParser.json());
 
 // Routes
 const moviesRouter = require("./routes/movies");

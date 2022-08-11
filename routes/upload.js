@@ -1,35 +1,16 @@
 const express = require("express");
-const fileUpload = require("express-fileupload");
+const uploader = require("../config/uploader");
 
 const router = express.Router();
 
-router.post("/images", fileUpload(), (req, res) => {
-    if (req.files) {
-        let file = req.files.file;
-
-        // checking file size - max size - 1 mb
-        if (file.size > 1048576) res.status(413).send("Payload too large");
-
-        const filename = new Date().getTime() + "_" + file.name;
-
-        file.mv("./uploads/images/" + filename, function (error) {
-            if (error) {
-                res.status(500).json({
-                    message: "Error while uploading file",
-                });
-            } else {
-                res.json({
-                    status: true,
-                    message: "File uploaded successfully",
-                    data: {
-                        file: filename,
-                    },
-                });
-            }
-        });
-    } else {
-        res.status(400).send({ message: "No file uploaded" });
-    }
+router.post("/images", uploader, async function (req, res, next) {
+    res.send({
+        success: true,
+        message: "Uploaded!",
+        data: {
+            url: req.file.location,
+        },
+    });
 });
 
 module.exports = router;
